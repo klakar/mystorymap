@@ -1,0 +1,86 @@
+<html>
+<head>
+<!-- The web browser window title -->
+<title>A storymap from geosupportsystem.wordpress.com</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /><!-- Map styles -->
+<link rel="stylesheet" href="storymap.css" /><!-- Story Map styles -->
+</head>
+<body>
+
+
+<!-- The three main elements for the story map -->
+<div id="title">The Story Map Title</div> <!-- Change to any title you want -->
+<div id="story"></div> <!-- Holds the story html, don't change -->
+<div id="map"></div> <!-- Holds the background map, don't change -->
+
+<!-- Element for stepping backwards in the story -->
+<div id="rewind">Previous</div> <!-- Edit the text to your likeing -->
+
+<!-- In this section calls are made to scripts that create the map and start the story -->
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.4"></script>
+<script>
+	var baseMap = "osm"; // valid options "osm", "toner", "terrain", "watercolor", "mapbox" (requires 'username.mapid' in storymap.js)
+	var startCoordinate = [57.66818, 14.97132]; // Change this to your own start position (lat/long)
+	var startZoom = 10; // Change this to you desired start zoom level
+	var titleOpacity = 0.6; // Set the opacity for the title element
+	var storyOpacity = 0.75; // Set the opacity for the story element
+	var panTime = 2; // Set the time (seconds) for panning the map
+	var titleTextColor = "#101010"; // The main title text color
+	var titleBackground = "#D5D5D5"; // The main title background color
+	var storyTextColor = "#101010"; // Story text color
+	var storyBackground = "#EEEEEE"; // Story background color
+</script>
+<script src="storymap.js"></script> <!-- load start settings and functions for the storymap -->
+
+<!-- This is where the story begins! -->
+<script>
+
+// startText is the text used first in the story.
+// use <h1></h1> for headlines
+// use class='videoWrapper' for videoclipps (see example below)
+// do not use "embed" straight up for video, if you want to adapt the size of the video to the screen size.
+// tested html-tags: <b></b>, <i></i>, <u></u>, <a></a>, <br>, <img>, but most should work...
+// don't use " inside texts, use ' if necessary.
+var startText = "<h1>Start Page</h1><div class='videoWrapper'><iframe src='http://www.youtube.com/embed/kkdJhfwzI9c?autoplay=1' frameborder='0' allowfullscreen></iframe></div><br><br>This is the <b>HTML</b> text for the first story text.<br><br>The video above show the difference in <i>rendering time</i> when using functions to simplify the geometry in QGIS.<br><br><i>Click in the map to advance the story.</i>";
+
+// position, bubbleText and storyText below are connected and the order is therefore very important
+
+// position is a list with all story positions, except the start position.
+var position = [
+	[56.02856, 14.14713], // first position
+	[58.02575, 14.46584],
+	[57.66695, 14.97063]
+];
+
+// bubbleText is a list with the content of the pop-ups for each marker.
+// you can use HTML here as well.
+// The showPopUp variable dictates if the pop-ups will be shown as default
+var showPopUp = false;
+var useMarker = true; //disable the use of markers
+var bubbleText = [
+	"Naturrum<br><a href='http://www.vattenriket.kristianstad.se/naturum/'>Visit web page</a>", // first pop-up
+	"Gränna",
+	"Eksjö<br><img src='http://www.visiteksjo.se/wp-content/uploads/2013/11/vattentorn-300x158.jpg'>"
+];
+
+// storyText is a list with the story content.
+// it's important to match position, bubbleText and storyText in the correct order.
+var storyText = [
+	"<H1>Naturrum - Kristianstad</H1><img src='http://www.vattenriket.kristianstad.se/naturum/bilder/index_maj2.jpg'><br><br>The picture is borrowed from the Naturrum webb page, pay it a visit.<br><br><a href='http://www.vattenriket.kristianstad.se/naturum/'>Web page</a>", // first story HTML
+
+	"<h1>Gränna - Visingsö</h1><img src='http://destinationjonkoping.se/images/200.7c2c3c8e12c81fff89e80001222/Polkagrisar_Jonkoping.jpg'><br><br>The photo is borrowed from <a href='http://destinationjonkoping.se/grannavisingso/gora/polkagrisar.html'>Destination Jönköping</a>.<br><br>There's a bit more than <i>polkagrisar</i> in Gränna, but there are a <u>lot</u> of candy factories!<br><ul><li>Gränna Museum</li><li>Braehus Castle</li><li>BP-macken</li><li>Bicycle riding on Visingsö</li><li>Polar Centre</li><li>André museum</li><li>Golf</li><li>Äppenvikens Adventure Park</li><li>etc...</li></ul>",
+
+	"<h1>Eksjö</h1><img src='http://www.visiteksjo.se/wp-content/uploads/2014/05/affisch_v%C3%A5rfest_2014_huvud-2.jpg'><br><br>Every Saturday all summer there's a marching band and parade. You can also find a lot of exciting events all year around. Find out more on <a href='http://www.visiteksjo.se'>Visit Eksjö</a>."
+
+];
+
+
+</script>
+</body>
+</html>
+
+
